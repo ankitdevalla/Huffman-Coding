@@ -1,0 +1,42 @@
+    private class PriorityQueue<E extends Comparable<? super E>> {
+        
+        // instance variable to be the container of the priority queue
+        private ArrayList<E> con;
+
+        // 0 argument constructor
+        private PriorityQueue() {
+            con = new ArrayList<E>();
+        }
+
+        // remove from the front of the priority queue
+        private E dequeue() {
+            return con.remove(con.size() - 1);
+        }
+
+        // size method
+        private int size() {
+            return con.size();
+        }
+
+        // add method
+        private void enqueue(E item) {
+            if (con.size() == 0) {
+                con.add(item);
+            }
+            else {
+                boolean canAdd = true;
+                int index = 0;
+                while (index < con.size() && canAdd) {
+                    int diff = con.get(index).compareTo(item);
+                    if (diff <= 0) {
+                        canAdd = false;
+                        con.add(index, item);
+                    }
+                    index++;
+                }
+                if (canAdd) {
+                    con.add(item);
+                }
+            }
+        }
+    }
